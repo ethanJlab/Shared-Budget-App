@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const user = require('../../models/user');
+//const user = require('../../models/user');
 
 // @route GET api/users/test
 // @description tests books route

@@ -1,9 +1,12 @@
 // app.js
 
 const express = require('express');
-const connectDB = require('./config/db');
+const connectDB = require('./api/config/db');
+const userRoute = require('./api/routes/users');
 
 const app = express();
+
+app.use('/api/users/tests', userRoute);
 
 connectDB();
 app.get('/', (req, res) => res.send('Hello world!'));

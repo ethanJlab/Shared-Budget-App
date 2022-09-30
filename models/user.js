@@ -12,11 +12,11 @@ const userSchema = new mongoose.Schema({
         required: true
         },
     userId: {
-        type: Int64,
+        type: Int32Array,
         required: true
         },
     _id: {
-        type: ObjectId,
+        type: Object,
         required: true
         }
 });
