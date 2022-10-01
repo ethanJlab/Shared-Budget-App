@@ -22,8 +22,9 @@ router.get('/test', (req, res) => res.send('route testing!'));
 // @description get all users
 // @access Public
 router.get('/getAllUsers', (req, res) => {
+    var usersAr = [];
     async function run() {
-        var users = [];
+        
         try {
             const database = client.db("Budget_app");
             const users = database.collection("Users");
@@ -31,16 +32,22 @@ router.get('/getAllUsers', (req, res) => {
             // Query for all users
             const query = {};
             const cursor = users.find(query);
-            
-             usercursor.toArray();
+            usersAr = await cursor.toArray();
+            console.log(usersAr);
 
 
         } finally {
-            await client.close();
+            //await client.close();
+            //return usersAr;
         }
-        return users;
+        
     }
-    res.send(run());
+    
+    run().then(() => {
+        res.send(usersAr);
+    }, (err) => {
+        res.send("error in /getAllUsers");
+    });
 });
 
 module.exports = router;
