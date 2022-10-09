@@ -37,7 +37,7 @@ router.get('/getAllUsers', (req, res) => {
 
 
         } finally {
-            //await client.close();
+            await client.close();
             //return usersAr;
         }
         
@@ -46,8 +46,37 @@ router.get('/getAllUsers', (req, res) => {
     run().then(() => {
         res.send(usersAr);
     }, (err) => {
-        res.send("error in /getAllUsers");
+        res.send(err);
     });
+});
+
+// @route GET /users/getAllUsers
+// @description get user by Username
+// @access Public
+// TODO: finish this route
+router.get('/getUserbyUserName', (req, res) => {
+    const user_Name = req.body.userName;
+
+    async function run() {
+        
+        try {
+            const database = client.db("Budget_app");
+            const users = database.collection("Users");
+            
+            // Query for all users
+            const query = {userName: user_Name};
+            const cursor = users.find(query);
+            usersAr = await cursor.toArray();
+            //console.log(usersAr);
+
+
+        } finally {
+            //await client.close();
+            //return usersAr;
+        }
+        
+    }
+
 });
 
 module.exports = router;
