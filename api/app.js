@@ -7,11 +7,17 @@ var cors = require('cors')
 const connectDB = require('./config/db');
 
 var usersRouter = require('./routes/users');
+var loginAPIRouter = require('./routes/login');
+var createUserAPIRouter = require('./routes/createUser');
 
 var app = express();
 
+app.use(express.json());
+
 // view engine setup
 app.use('/users', usersRouter);
+app.use('/login', loginAPIRouter);
+app.use('/createUser', createUserAPIRouter);
 
 connectDB();
 app.get('/', (req, res) => res.send('Hello world!'));
